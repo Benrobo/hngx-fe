@@ -48,7 +48,7 @@
       ];
       const currentDate = new Date();
       const currentDay = daysOfWeek[currentDate.getUTCDay()];
-      const currentUTC = new Date().toISOString();
+      const currentUTC = new Date().getTime();
 
       utcelem.innerHTML = currentUTC;
       dow.innerHTML = currentDay;
