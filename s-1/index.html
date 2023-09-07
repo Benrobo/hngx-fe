@@ -38,12 +38,10 @@
       ];
       const currentDate = new Date();
       const currentDay = daysOfWeek[currentDate.getUTCDay()];
-      const currentUTC = new Date().getTime();
+      const currentUTC = Date.now();
 
       utcelem.innerHTML = currentUTC;
       dow.innerHTML = currentDay;
-      // utcelem.setAttribute("data-testid", currentUTC);
-      // dow.setAttribute("data-testid", currentDay);
     </script>
   </body>
 </html>
