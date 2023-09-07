@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HngX Frontend Assessment</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="img-cont">
+        <img
+          src="https://ca.slack-edge.com/T05FFAA91JP-U05R8ALRWCT-ab1781ce5e54-512"
+          data-testid="slackDisplayImage"
+          alt="benrobo"
+          class="profile-img"
+        />
+      </div>
+      <div class="info">
+        <h2 class="name" data-testid="slackUserName">benrobo</h2>
+        <div class="track-cont">
+          <span class="track" data-testid="myTrack">Frontend</span>
+          <a
+            data-testid="githubURL"
+            href="https://github.com/Benrobo/hngx-fe/tree/main/s-1"
+            class="github"
+            >Github</a
+          >
+        </div>
+        <br />
+        <div class="date">
+          <span class="dow" data-testid="currentDayOfTheWeek">Thursday</span>
+          <span class="utc" data-testid="currentUTCTime"></span>
+        </div>
+      </div>
+    </div>
+    <script>
+      let utcelem = document.querySelector(".utc");
+      let dow = document.querySelector(".dow");
+      const daysOfWeek = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const currentDate = new Date();
+      const currentDay = daysOfWeek[currentDate.getUTCDay()];
+      const currentUTC = new Date().getTime();
+
+      utcelem.innerHTML = currentUTC;
+      dow.innerHTML = currentDay;
+      // utcelem.setAttribute("data-testid", currentUTC);
+      // dow.setAttribute("data-testid", currentDay);
+    </script>
+  </body>
+</html>

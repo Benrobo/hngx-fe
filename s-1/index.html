@@ -4,36 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HngX Frontend Assessment</title>
-    <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <div class="card">
-      <div class="img-cont">
-        <img
-          src="https://ca.slack-edge.com/T05FFAA91JP-U05R8ALRWCT-ab1781ce5e54-512"
-          data-testid="slackDisplayImage"
-          alt="benrobo"
-          class="profile-img"
-        />
-      </div>
-      <div class="info">
-        <h2 class="name" data-testid="slackUserName">benrobo</h2>
-        <div class="track-cont">
-          <span class="track" data-testid="myTrack">Frontend</span>
-          <a
-            data-testid="githubURL"
-            href="https://github.com/Benrobo/hngx-fe/tree/main/s-1"
-            class="github"
-            >Github</a
-          >
-        </div>
-        <br />
-        <div class="date">
-          <span class="dow" data-testid="currentDayOfTheWeek">Thursday</span>
-          <span class="utc" data-testid="currentUTCTime"></span>
-        </div>
-      </div>
-    </div>
+    <img
+      src="https://ca.slack-edge.com/T05FFAA91JP-U05R8ALRWCT-ab1781ce5e54-512"
+      data-testid="slackDisplayImage"
+      alt="benrobo"
+      class="profile-img"
+      width="200"
+    />
+    <h2 class="name" data-testid="slackUserName">benrobo</h2>
+    <span class="track" data-testid="myTrack">Frontend</span>
+    <a
+      data-testid="githubURL"
+      href="https://github.com/Benrobo/hngx-fe/tree/main/s-1"
+      class="github"
+      >Github</a
+    >
+    <span class="dow" data-testid="currentDayOfTheWeek">Thursday</span>
+    <span class="utc" data-testid="currentUTCTime"></span>
     <script>
       let utcelem = document.querySelector(".utc");
       let dow = document.querySelector(".dow");
