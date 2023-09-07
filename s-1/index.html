@@ -11,17 +11,17 @@
       <div class="img-cont">
         <img
           src="https://ca.slack-edge.com/T05FFAA91JP-U05R8ALRWCT-ab1781ce5e54-512"
-          data-testid="https://ca.slack-edge.com/T05FFAA91JP-U05R8ALRWCT-ab1781ce5e54-512"
+          data-testid="slackDisplayImage"
           alt="benrobo"
           class="profile-img"
         />
       </div>
       <div class="info">
-        <h2 class="name" data-testid="benrobo">Benrobo</h2>
+        <h2 class="name" data-testid="slackUserName">benrobo</h2>
         <div class="track-cont">
-          <span class="track" data-testid="frontend">Frontend</span>
+          <span class="track" data-testid="myTrack">Frontend</span>
           <a
-            data-testid="https://github.com/Benrobo/hngx-fe/tree/main/s-1"
+            data-testid="githubURL"
             href="https://github.com/Benrobo/hngx-fe/tree/main/s-1"
             class="github"
             >Github</a
@@ -29,8 +29,8 @@
         </div>
         <br />
         <div class="date">
-          <span class="dow">Thursday</span>
-          <span class="utc"></span>
+          <span class="dow" data-testid="currentDayOfTheWeek">Thursday</span>
+          <span class="utc" data-testid="currentUTCTime"></span>
         </div>
       </div>
     </div>
@@ -52,8 +52,8 @@
 
       utcelem.innerHTML = currentUTC;
       dow.innerHTML = currentDay;
-      utcelem.setAttribute("data-testid", currentUTC);
-      dow.setAttribute("data-testid", currentDay);
+      // utcelem.setAttribute("data-testid", currentUTC);
+      // dow.setAttribute("data-testid", currentDay);
     </script>
   </body>
 </html>
