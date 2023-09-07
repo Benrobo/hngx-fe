@@ -1,1 +1,0 @@
-# HngX frontend assessment
