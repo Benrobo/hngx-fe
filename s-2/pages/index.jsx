@@ -20,7 +20,7 @@ function Home() {
   ]);
 
   return (
-    <Layout>
+    <Layout showFooter={true}>
       <div className="w-full h-full min-h-[600px] md:min-h-[600px] relative bg-white-200 flex flex-col items-center justify-center ">
         {/* navbar */}
         <div className="w-full md:max-w-[80%] mx-auto min-h-[80px] absolute top-2 px-4 flex items-center justify-between gap-10 z-upper">
@@ -102,7 +102,7 @@ function Home() {
       <section className="w-full min-h-[500px] flex flex-col items-center justify-start mt-9 py-9">
         <div className="w-full md:max-w-[80%] mx-auto ">
           {/* heading */}
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex items-center justify-between px-9 md:px-0">
             <h1 className="text-dark-100 font-dmsansB md:text-[36px] ">
               Feature Movie
             </h1>
@@ -113,7 +113,6 @@ function Home() {
           </div>
           {/* all movies */}
           <FeaturedMovies />
-          <div className="w-[200px] bg-red-200 py-10"></div>
         </div>
       </section>
     </Layout>

@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { dmSans, dmSansBold, ppB, ppEB, ppReg } from "@/config/fonts";
+import { dmSans, dmSansBold, ppB, ppEB, ppReg } from "../config/fonts";
 
 export default function App({ Component, pageProps }) {
   return (
