@@ -4,17 +4,19 @@ import posterImg from "../../public/images/poster/Poster.png";
 import Image from "next/image";
 
 function FeaturedMovies({ movies }) {
+  const imagePrix = `https://image.tmdb.org/t/p/original`;
+
   return (
     <div className="w-full mt-9 flex flex-col items-center justify-center md:grid lg:grid xl:grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3 gap-10">
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
+      {movies.map((m) => (
+        <MovieCard
+          key={m.id}
+          id={m.id}
+          title={m.title}
+          release_date={m.release_date}
+          imageUrl={`${imagePrix}/${m?.backdrop_path}`}
+        />
+      ))}
       <br />
     </div>
   );

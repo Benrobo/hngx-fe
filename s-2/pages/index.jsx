@@ -10,6 +10,7 @@ import { ChevronRightIcon, PlayIcon, SearchIcon } from "../components/SvgIcons";
 import { twMerge } from "tailwind-merge";
 import FeaturedMovies from "../components/Movies/Featured";
 import { getPopularMovies } from "../http";
+import Link from "next/link";
 
 function Home({ movieData }) {
   const [pagination, setPagniation] = React.useState([
@@ -83,6 +84,8 @@ function Home({ movieData }) {
     setSelectedPosterMovie(filteredMovie);
     setPause(true);
   }
+
+  console.log(movies);
 
   return (
     <Layout showFooter={true}>
@@ -179,13 +182,16 @@ function Home({ movieData }) {
             <h1 className="text-dark-100 font-dmsansB md:text-[36px] ">
               Feature Movie
             </h1>
-            <button className="text-red-205 text-[18px] font-dmsans flex items-center justify-center gap-1 ">
+            <Link
+              href="#"
+              className="text-red-205 text-[18px] font-dmsans flex items-center justify-center gap-1 "
+            >
               See more
               <ChevronRightIcon />
-            </button>
+            </Link>
           </div>
           {/* all movies */}
-          <FeaturedMovies />
+          <FeaturedMovies movies={movies} />
         </div>
       </section>
     </Layout>
@@ -201,9 +207,16 @@ function PosterComponent({ movie }) {
 
   const fullImage = `${imagePrix}/${movie?.backdrop_path}`;
 
+  const imageStyle = {
+    backgroundImage: `url(${fullImage ?? "/images/poster/Poster.png"})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  };
+
   return (
     <div className="w-full h-[650px] md:min-h-[600px] ">
-      <Image
+      {/* <Image
         // src={posterImg}
         src={fullImage ?? posterImg}
         className={"w-screen h-screen md:h-full object-cover "}
@@ -213,7 +226,13 @@ function PosterComponent({ movie }) {
         placeholder="empty"
         priority={true}
         blurDataURL={fullImage}
-      />
+      /> */}
+      <div
+        className="w-screen h-screen md:h-full object-cover relative"
+        style={imageStyle}
+      >
+        <div className="w-full h-full absolute left-0 top-0 bg-dark-800"></div>
+      </div>
 
       <div className="w-screen h-full absolute top-[8em] md:top-[1em] flex items-center ">
         <div className="w-full px-6 md:max-w-[80%] mx-auto flex items-center justify-between ">
