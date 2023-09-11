@@ -6,8 +6,10 @@ import posterImg from "../public/images/poster/Poster.png";
 import imdbImg from "../public/images/logo/imdb.svg";
 import tomatoImg from "../public/images/logo/tomato.svg";
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { PlayIcon, SearchIcon } from "../component/SvgIcons";
+import { ChevronRightIcon, PlayIcon, SearchIcon } from "../component/SvgIcons";
 import { twMerge } from "tailwind-merge";
+import FeaturedMovies from "../component/Movies/Featured";
+import MovieCard from "../component/Movies/Card";
 
 function Home() {
   const [pagination, setPagniation] = React.useState([
@@ -20,7 +22,7 @@ function Home() {
 
   return (
     <Layout>
-      <div className="w-full h-full min-h-[600px] md:min-h-[600px] relative bg-dark-200 flex flex-col items-center justify-center ">
+      <div className="w-full h-full min-h-[600px] md:min-h-[600px] relative bg-white-200 flex flex-col items-center justify-center ">
         {/* navbar */}
         <div className="w-full md:max-w-[80%] mx-auto min-h-[80px] absolute top-2 px-4 flex items-center justify-between gap-10 z-upper">
           <div className="w-auto flex items-center justify-center gap-4">
@@ -96,6 +98,26 @@ function Home() {
           ))}
         </div>
       </div>
+
+      {/* feature movie */}
+      <section className="w-full min-h-[500px] flex flex-col items-center justify-start mt-9 py-9">
+        <div className="w-full md:max-w-[80%] mx-auto ">
+          {/* heading */}
+          <div className="w-full flex items-center justify-between">
+            <h1 className="text-dark-100 font-dmsansB md:text-[36px] ">
+              Feature Movie
+            </h1>
+            <button className="text-red-205 text-[18px] font-dmsans flex items-center justify-center gap-1 ">
+              See more
+              <ChevronRightIcon />
+            </button>
+          </div>
+
+          {/* all movies */}
+          <FeaturedMovies />
+          <MovieCard />
+        </div>
+      </section>
     </Layout>
   );
 }

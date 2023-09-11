@@ -29,6 +29,12 @@ const dmSans = Poppins({
   weight: ["500"],
 });
 
+const dmSansBold = Poppins({
+  subsets: ["latin"],
+  variable: "--font-dmsans-bold",
+  weight: ["700"],
+});
+
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -39,6 +45,7 @@ export default function App({ Component, pageProps }) {
             --font-ppB: ${ppB.style.fontFamily};
             --font-ppEB: ${ppEB.style.fontFamily};
             --font-dmsans: ${dmSans.style.fontFamily};
+            --font-dmsans-bold: ${dmSansBold.style.fontFamily};
           }
         `}
       </style>

@@ -2,8 +2,9 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: "class",
   theme: {
@@ -131,6 +132,7 @@ module.exports = {
         ppB: ['var(--font-ppB)', ...fontFamily.sans],
         ppEB: ['var(--font-ppEB)', ...fontFamily.sans],
         dmsans: ['var(--font-dmsans)', ...fontFamily.sans],
+        dmsansB: ['var(--font-dmsans-bold)', ...fontFamily.sans],
       },
     },
   },
