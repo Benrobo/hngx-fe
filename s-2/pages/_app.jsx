@@ -1,39 +1,6 @@
-import { Poppins, DM_Sans } from "@next/font/google";
 import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
-
-const ppReg = Poppins({
-  subsets: ["latin"],
-  variable: "--font-ppReg",
-  weight: ["400"],
-});
-
-// bold poppins
-const ppB = Poppins({
-  subsets: ["latin"],
-  variable: "--font-ppB",
-  weight: ["600"],
-});
-
-// extra bold
-const ppEB = Poppins({
-  subsets: ["latin"],
-  variable: "--font-ppEB",
-  weight: ["900"],
-});
-
-// dm SANS
-const dmSans = Poppins({
-  subsets: ["latin"],
-  variable: "--font-dmsans",
-  weight: ["500"],
-});
-
-const dmSansBold = Poppins({
-  subsets: ["latin"],
-  variable: "--font-dmsans-bold",
-  weight: ["700"],
-});
+import { dmSans, dmSansBold, ppB, ppEB, ppReg } from "@/config/fonts";
 
 export default function App({ Component, pageProps }) {
   return (

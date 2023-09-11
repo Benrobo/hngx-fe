@@ -1,14 +1,9 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: {
-    content: [
-      "./app/**/*.{js,ts,jsx,tsx,mdx}",
-      "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-      "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
-  },
-  darkMode: "class",
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -125,18 +120,18 @@ module.exports = {
         },
         gray: {
           100: "#a0a6c9",
-          200: "#3f4550"
-        }
+          200: "#3f4550",
+        },
       },
       fontFamily: {
         // variable and include fallback fonts from tailwind default theme
-        ppReg: ['var(--font-ppReg)', ...fontFamily.sans],
-        ppB: ['var(--font-ppB)', ...fontFamily.sans],
-        ppEB: ['var(--font-ppEB)', ...fontFamily.sans],
-        dmsans: ['var(--font-dmsans)', ...fontFamily.sans],
-        dmsansB: ['var(--font-dmsans-bold)', ...fontFamily.sans],
+        ppReg: ["var(--font-ppReg)"],
+        ppB: ["var(--font-ppB)"],
+        ppEB: ["var(--font-ppEB)"],
+        dmsans: ["var(--font-dmsans)"],
+        dmsansB: ["var(--font-dmsans-bold)"],
       },
     },
   },
   plugins: [],
-}
+};

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import Layout from "../component/Layout";
+import Layout from "../components/Layout";
 import Image from "next/image";
 import logoImg from "../public/images/logo/tv.svg";
 import posterImg from "../public/images/poster/Poster.png";
 import imdbImg from "../public/images/logo/imdb.svg";
 import tomatoImg from "../public/images/logo/tomato.svg";
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { ChevronRightIcon, PlayIcon, SearchIcon } from "../component/SvgIcons";
+import { ChevronRightIcon, PlayIcon, SearchIcon } from "../components/SvgIcons";
 import { twMerge } from "tailwind-merge";
-import FeaturedMovies from "../component/Movies/Featured";
-import MovieCard from "../component/Movies/Card";
+import FeaturedMovies from "../components/Movies/Featured";
 
 function Home() {
   const [pagination, setPagniation] = React.useState([
@@ -114,6 +113,7 @@ function Home() {
           </div>
           {/* all movies */}
           <FeaturedMovies />
+          <div className="w-[200px] bg-red-200 py-10"></div>
         </div>
       </section>
     </Layout>

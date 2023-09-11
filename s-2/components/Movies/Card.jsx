@@ -6,14 +6,13 @@ function MovieCard() {
   const imageStyle = {
     backgroundImage: `url("/images/poster/Poster.png")`,
     backgroundSize: "cover",
-    backgroundRepeat: "no-repeat", // Prevent image repetition
-    backgroundPosition: "center", // Center the image
-    // backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
   };
 
   return (
     <div className="w-[250px] max-w-[250px] min-h-[490px] flex flex-col items-center justify-start ">
-      <div className="w-full h-[370px] " style={imageStyle}>
+      <div className="w-full h-[360px] " style={imageStyle}>
         <div className="w-full flex items-center justify-between py-5">
           <span
             id="tag"
