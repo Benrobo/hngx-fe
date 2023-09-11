@@ -112,10 +112,8 @@ function Home() {
               <ChevronRightIcon />
             </button>
           </div>
-
           {/* all movies */}
           <FeaturedMovies />
-          <MovieCard />
         </div>
       </section>
     </Layout>
