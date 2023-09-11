@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import logoImg from "../public/images/logo/tv.svg";
@@ -9,8 +9,9 @@ import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { ChevronRightIcon, PlayIcon, SearchIcon } from "../components/SvgIcons";
 import { twMerge } from "tailwind-merge";
 import FeaturedMovies from "../components/Movies/Featured";
+import { getPopularMovies } from "../http";
 
-function Home() {
+function Home({ movieData }) {
   const [pagination, setPagniation] = React.useState([
     { value: 1, active: false },
     { value: 2, active: false },
@@ -18,6 +19,70 @@ function Home() {
     { value: 4, active: false },
     { value: 5, active: false },
   ]);
+  const [error, setError] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [previewMovie, setPreviewMovie] = useState([]);
+  const [selectedPostermovie, setSelectedPosterMovie] = useState({});
+  const [pause, setPause] = useState(false);
+
+  const imagePrix = `https://image.tmdb.org/t/p/original`;
+
+  useEffect(() => {
+    const movies = movieData?.data?.results;
+    setError(movieData?.err);
+    setMovies(movies);
+
+    const midIndex = Math.floor(movies.length / 2);
+    const fivePreviewMovie = movies?.length > 0 ? movies.slice(0, 6) : [];
+    setPreviewMovie(fivePreviewMovie);
+    setSelectedPosterMovie(fivePreviewMovie[0]);
+  }, [movieData]);
+
+  // handle random movie selection
+  useEffect(() => {
+    const countInterval = setInterval(() => {
+      randomPosterMovie();
+      if (pause) {
+        clearInterval(countInterval);
+        console.log("[INTEVAL]: CLEARED");
+        return;
+      }
+    }, 15000);
+
+    if (pause === false) {
+      console.log("[POSTER TIMING]: RESUME");
+      console.log("[INTEVAL]: RESUMED");
+    }
+
+    function randomPosterMovie() {
+      if (previewMovie.length >= 5) {
+        const rand = Math.floor(Math.random() * 5);
+        const movie = previewMovie[rand];
+        setSelectedPosterMovie(movie);
+      }
+    }
+
+    return () => {
+      clearInterval(countInterval); // Clear the interval when the component unmounts
+    };
+  }, [previewMovie, movies, pause]);
+
+  // monitor when user clicks the movie indicator and resume random timing after 15ms
+  useEffect(() => {
+    if (pause) {
+      setTimeout(() => {
+        setPause(false);
+      }, 15000);
+      console.log("[POSTER TIMING]: PAUSED");
+    }
+  }, [pause]);
+
+  function selectMovie(id) {
+    if (!id) return;
+    const filteredMovie = previewMovie.find((m) => m.id === id);
+    setSelectedPosterMovie(filteredMovie);
+    setPause(true);
+  }
 
   return (
     <Layout showFooter={true}>
@@ -59,27 +124,31 @@ function Home() {
         </div>
 
         {/* Poster */}
-        <PosterComponent />
+        <PosterComponent movie={selectedPostermovie} />
 
         {/* pagination box (medium screen) */}
         <div className="w-auto h-full flex flex-col items-center justify-center absolute right-0 invisible md:visible ">
           <div className="w-auto flex flex-col items-start justify-start gap-2 px-6">
-            {pagination?.map((p) => (
+            {previewMovie?.map((p, idx) => (
               <button
                 className={twMerge(
-                  p.active
+                  p.id === selectedPostermovie?.id
                     ? "text-white-100 text-[16px]"
                     : "text-white-300 text-[12px] ",
                   "font-ppB flex items-center justify-start"
                 )}
+                key={p.id}
+                onClick={() => selectMovie(p.id)}
               >
                 <span
                   className={twMerge(
                     "w-[20px] rounded-[30px] mr-2 p-[2px] ",
-                    p.active ? "bg-white-100" : "bg-transparent"
+                    p.id === selectedPostermovie?.id
+                      ? "bg-white-100"
+                      : "bg-transparent"
                   )}
                 ></span>
-                <span className="transition-all">{p.value}</span>
+                <span className="transition-all">{idx + 1}</span>
               </button>
             ))}
           </div>
@@ -87,12 +156,16 @@ function Home() {
 
         {/* Pagination box (small screen) */}
         <div className="w-screen flex items-center justify-center gap-2 py-3 absolute bottom-1 visible  md:hidden ">
-          {pagination?.map((p) => (
+          {previewMovie?.map((p) => (
             <button
               className={twMerge(
                 "w-[20px] rounded-[30px] mr-2 p-[2px] ",
-                p.active ? "bg-white-100" : "bg-white-300 opacity-[.4]"
+                p.id === selectedPostermovie?.id
+                  ? "bg-white-100"
+                  : "bg-white-300 opacity-[.4]"
               )}
+              key={p.id}
+              onClick={() => selectMovie(p.id)}
             ></button>
           ))}
         </div>
@@ -121,15 +194,25 @@ function Home() {
 
 export default Home;
 
-function PosterComponent() {
+function PosterComponent({ movie }) {
+  const imagePrix = `https://image.tmdb.org/t/p/original`;
+
+  if (Object.entries(movie).length === 0) return null;
+
+  const fullImage = `${imagePrix}/${movie?.backdrop_path}`;
+
   return (
     <div className="w-full h-[650px] md:min-h-[600px] ">
       <Image
-        src={posterImg}
+        // src={posterImg}
+        src={fullImage ?? posterImg}
         className={"w-screen h-screen md:h-full object-cover "}
-        alt="image"
+        alt="poster image"
         width={0}
         height={0}
+        placeholder="empty"
+        priority={true}
+        blurDataURL={fullImage}
       />
 
       <div className="w-screen h-full absolute top-[8em] md:top-[1em] flex items-center ">
@@ -140,26 +223,24 @@ function PosterComponent() {
             className="w-full md:w-[404px] h-auto flex items-start justify-start flex-col gap-[16px] "
           >
             <h1 className="text-white-100 text-[20px] md:text-[48px] leading-[56px] font-ppB ">
-              John Wick 3 : Parabellum
+              {movie?.original_title ?? ""}
             </h1>
             <div className="w-full flex items-center justify-start gap-10">
               <div className="w-auto flex items-center gap-3">
                 <Image src={imdbImg} width={35} height={30} />
                 <span className="text-white-105 font-dmsans text-[13px]">
-                  86.0 / 100
+                  0 / 100
                 </span>
               </div>
               <div className="w-auto flex items-center gap-3">
                 <Image src={tomatoImg} width={15} height={10} alt="tomato" />
                 <span className="text-white-105 font-dmsans text-[13px]">
-                  97%
+                  0%
                 </span>
               </div>
             </div>
             <p className="text-white-100 text-[12px] md:text-[14px] font-dmsans ">
-              John Wick is on the run after killing a member of the
-              international assassins' guild, and with a $14 million price tag
-              on his head, he is the target of hit men and women everywhere.
+              {movie?.overview}
             </p>
             <Button
               leftIcon={<PlayIcon />}
@@ -180,4 +261,25 @@ function PosterComponent() {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const apiKey = process.env.TMDB_API;
+  const resp = await getPopularMovies(apiKey);
+
+  let result = { err: false, data: null };
+
+  if (typeof resp?.results === "undefined") {
+    result["err"] = true;
+    result["data"] = null;
+  } else {
+    result["data"] = resp;
+  }
+
+  return {
+    props: {
+      movieData: result,
+    },
+    revalidate: 60,
+  };
 }
