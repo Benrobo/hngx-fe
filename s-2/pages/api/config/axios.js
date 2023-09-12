@@ -7,8 +7,9 @@ const $http = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
   },
-  withCredentials: true,
+  //   withCredentials: true,
 });
 
 module.exports = $http;

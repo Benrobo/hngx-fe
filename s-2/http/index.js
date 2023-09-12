@@ -26,10 +26,10 @@ export const getMovieById = async (apiKey, id) => {
 
 // https://api.themoviedb.org/3/search/movie?query=ben&include_adult=false&language=en-US&page=2&api_key=85e059b183a6a4c680d182b7cf2b1cf9
 
-export async function searchMovieByName(query) {
+export async function searchMovieByName(query, qpiKey) {
   try {
     const res = await $http.get(
-      `/movie/?query=${query}?language=en-US&api_key=85e059b183a6a4c680d182b7cf2b1cf9`
+      `/search/movie?query=${query}&include_adult=false&language=en-US&page=2&api_key=${qpiKey}`
     );
     return res?.data ?? res?.response?.data;
   } catch (e) {

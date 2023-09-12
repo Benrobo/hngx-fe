@@ -12,37 +12,28 @@ import FeaturedMovies from "../components/Movies/Featured";
 import { getPopularMovies, searchMovieByName } from "../http";
 import Link from "next/link";
 import { Spinner } from "../components/Loader";
+import { useRouter } from "next/router";
 
 function Home({ movieData }) {
-  const [pagination, setPagniation] = React.useState([
-    { value: 1, active: false },
-    { value: 2, active: false },
-    { value: 3, active: true },
-    { value: 4, active: false },
-    { value: 5, active: false },
-  ]);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
-  const [moviesCopy, setMoviesCopy] = useState([]);
   const [previewMovie, setPreviewMovie] = useState([]);
   const [selectedPostermovie, setSelectedPosterMovie] = useState({});
   const [pause, setPause] = useState(false);
-  const [searchMovies, setSearchMovies] = useState([]);
   const [searchWrd, setSearchWrd] = useState("");
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const imagePrix = `https://image.tmdb.org/t/p/original`;
 
   useEffect(() => {
     const movies = movieData?.data?.results;
-    setError(movieData?.err);
+    movieData?.err && setError("something went wrong");
     setMovies(movies);
-    setMoviesCopy(movies);
 
     const fivePreviewMovie = movies?.length > 0 ? movies.slice(0, 6) : [];
     setPreviewMovie(fivePreviewMovie);
     setSelectedPosterMovie(fivePreviewMovie[0]);
-  }, []);
+  }, [movieData, movies]);
 
   // handle random movie selection
   useEffect(() => {
@@ -83,17 +74,6 @@ function Home({ movieData }) {
     }
   }, [pause]);
 
-  // keep track of current search wrd
-  useEffect(() => {
-    if (
-      searchWrd.length <= 0 ||
-      movies?.length !== moviesCopy?.length ||
-      error !== null
-    ) {
-      setMovies(moviesCopy);
-    }
-  }, [searchWrd]);
-
   function selectMovie(id) {
     if (!id) return;
     const filteredMovie = previewMovie.find((m) => m.id === id);
@@ -101,21 +81,12 @@ function Home({ movieData }) {
     setPause(true);
   }
 
-  // console.log(movies);
-
   async function handleSearchMovies() {
     if (searchWrd.length === 0) return;
-    setLoading(true);
-    const resp = await searchMovieByName(searchWrd);
-    setLoading(false);
-
-    if (resp?.success === false || typeof resp?.success === "undefined") {
-      setError(resp?.status_message);
-    } else {
-      setError(null);
-      setMovies(resp?.results);
-    }
+    router.push(`/search/${searchWrd}`);
   }
+
+  console.log({ error, movies });
 
   return (
     <Layout showFooter={true}>
@@ -137,18 +108,15 @@ function Home({ movieData }) {
           <div className="w-auto md:min-w-[525px] invisible md:visible ">
             <InputGroup>
               <Input
-                placeholder="What do you want to watch?"
+                placeholder="What do you want to watch? Enter to contiue"
                 className="text-white-100 font-ppReg text-[10px] "
                 borderWidth={2}
                 _focus={{ borderColor: "#fff" }}
                 _placeholder={{
-                  color: "#fff",
+                  color: "#ccc",
                 }}
                 style={{ fontFamily: "var(--font-dmsans)", fontSize: 16 }}
                 onChange={(e) => {
-                  if (e.target.value.length === 0) {
-                    setMovies(moviesCopy);
-                  }
                   setSearchWrd(e.target.value);
                 }}
                 onKeyDown={(e) => {
@@ -233,14 +201,9 @@ function Home({ movieData }) {
               <ChevronRightIcon />
             </Link>
           </div>
-          {/* all movies */}
-          {loading ? (
-            <div className="w-full h-auto mt-9 flex flex-col items-center justify-center">
-              <Spinner color="#000" />
-            </div>
-          ) : error === null ? (
-            <FeaturedMovies movies={movies} />
-          ) : null}
+
+          {!error && <FeaturedMovies movies={movies} />}
+
           {error !== null && (
             <div className="w-full h-[400px] flex flex-col items-center justify-center">
               <p className="text-dark-300 font-ppB">Something went wrong!</p>
