@@ -61,6 +61,21 @@ function SearchPage({ movieData }) {
         )}
         <div className="w-full max-w-[90%] flex flex-col items-center justify-center">
           {!error && <FeaturedMovies movies={movies} />}
+
+          {error ||
+            (movies.length === 0 && (
+              <div className="w-full h-auto min-h-[100px] flex flex-col items-center justify-center">
+                <p className="text-dark-300 font-ppB">
+                  {movies.length === 0
+                    ? "No movies were found"
+                    : "Something went wrong!"}
+                </p>
+                <h2 className="text-white-400 font-dmsans text-[20px] ">
+                  {error && "Oops, there is an error!"}
+                </h2>
+                <br />
+              </div>
+            ))}
         </div>
       </section>
       <br />
