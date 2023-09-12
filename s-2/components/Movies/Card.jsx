@@ -59,8 +59,15 @@ function MovieCard({ title, release_date, id, imageUrl }) {
   }
 
   return (
-    <div className="w-[250px] max-w-[250px] relative min-h-[490px] flex flex-col items-center justify-start leading-5 ">
-      <div className="w-full h-[360px] relative " style={imageStyle}>
+    <div
+      className="w-[250px] max-w-[250px] relative min-h-[490px] flex flex-col items-center justify-start leading-5 "
+      data-testid="movie-card"
+    >
+      <div
+        className="w-full h-[360px] relative "
+        style={imageStyle}
+        data-testid="movie-poster"
+      >
         <div className="w-full flex items-center justify-between py-5 px-3">
           <span
             id="tag"
@@ -83,16 +90,21 @@ function MovieCard({ title, release_date, id, imageUrl }) {
           </button>
         </div>
       </div>
-      <Link
-        href={`/movie/${id}`}
-        className="w-full flex flex-col items-start justify-start mt-4 gap-2"
-      >
-        <p className="text-white2-600 font-dmsans text-[13px] ">
-          {moment(release_date).startOf("day").fromNow()}
+      <div className="w-full flex flex-col items-start justify-start mt-4 gap-2">
+        <p
+          className="text-white2-600 font-dmsans text-[13px] "
+          data-testid="movie-release-date"
+        >
+          {release_date}
         </p>
-        <h1 className="text-dark-100 font-dmsansB text-[20px] ">{title}</h1>
+        <h1
+          className="text-dark-100 font-dmsansB text-[20px] "
+          data-testid="movie-title"
+        >
+          {title}
+        </h1>
         <div className="w-full flex items-center justify-start gap-10">
-          <div className="w-auto flex items-center gap-3">
+          {/* <div className="w-auto flex items-center gap-3">
             <Image src={imdbImg} width={35} height={30} />
             <span className="text-white-400 font-dmsans text-[13px]">
               0 / 100
@@ -101,14 +113,20 @@ function MovieCard({ title, release_date, id, imageUrl }) {
           <div className="w-auto flex items-center gap-3">
             <Image src={tomatoImg} width={15} height={10} alt="tomato" />
             <span className="text-white-400 font-dmsans text-[13px]">0%</span>
-          </div>
+          </div> */}
+          <Link
+            href={`/movies/${id}`}
+            className="text-red-306 font-dmsans text-[13px] underline "
+          >
+            View details
+          </Link>
         </div>
         <div className="w-full flex gap-1">
           <span className="text-white2-500 text-[13px] font-dmsansB ">
             {/* Action, Adventure */}
           </span>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }

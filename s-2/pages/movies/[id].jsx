@@ -32,15 +32,16 @@ function SelectedMovie({ movieData }) {
   const genre = movie?.genres?.map((g) => g.name);
   const title = movie?.original_title;
   const desc = movie?.overview;
-  const release_date = moment(movie?.release_date).format("YYYY");
+  const release_date = new Date(movie?.release_date).toISOString();
   const rating = formatNumber(movie?.vote_count);
 
   const movieRuntime = () => {
-    const totalMinutes = movie?.runtime;
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    const formattedTime = `${hours} hr ${minutes} min`;
-    return formattedTime;
+    // const totalMinutes = movie?.runtime;
+    // const hours = Math.floor(totalMinutes / 60);
+    // const minutes = totalMinutes % 60;
+    // const formattedTime = `${hours} hr ${minutes} min`;
+    // return formattedTime;
+    return movie?.runtime;
   };
 
   if (pageLoaded == false) {
@@ -62,7 +63,7 @@ function SelectedMovie({ movieData }) {
     <div className="w-full h-full relative">
       <div className="w-full flex items-start justify-start">
         <MovieSidebar />
-        {movieData?.err === false ? (
+        {movieData?.err === false && (
           <div className="w-full h-screen overflow-scroll flex flex-col items-center justify-start py-9 px-6">
             {/* Thumbnail */}
             <div
@@ -84,15 +85,26 @@ function SelectedMovie({ movieData }) {
             <div className="w-full flex flex-col items-center justify-start">
               <div className="w-full flex items-center justify-between">
                 <div className="w-auto flex items-center justify-start gap-3">
-                  <span className="text-dark-100 font-dmsans">{title}</span>
+                  <span
+                    className="text-dark-100 font-dmsans"
+                    data-testid="movie-title"
+                  >
+                    {title}
+                  </span>
                   <span className="text-dark-100 font-dmsans">.</span>
-                  <span className="text-dark-100 font-dmsans">
+                  <span
+                    className="text-dark-100 font-dmsans"
+                    data-testid="movie-release-date"
+                  >
                     {release_date}
                   </span>
                   {/* <span className="text-dark-100 font-dmsans">.</span> */}
                   {/* <span className="text-dark-100 font-dmsans">PG-13</span> */}
                   <span className="text-dark-100 font-dmsans">.</span>
-                  <span className="text-dark-100 font-dmsans">
+                  <span
+                    className="text-dark-100 font-dmsans"
+                    data-testid="movie-runtime"
+                  >
                     {movieRuntime()}
                   </span>
                   {/* tags */}
@@ -120,7 +132,10 @@ function SelectedMovie({ movieData }) {
               <br />
               <div className="w-full flex items-center justify-between gap-6">
                 <div className="w-full  max-w-[700px] mt-2 flex flex-col items-start justify-start">
-                  <p className="text-gray-600 font-dmsans text-[14px] ">
+                  <p
+                    className="text-gray-600 font-dmsans text-[14px] "
+                    data-testid="movie-overview"
+                  >
                     {desc}
                   </p>
                 </div>
@@ -128,7 +143,9 @@ function SelectedMovie({ movieData }) {
               </div>
             </div>
           </div>
-        ) : (
+        )}
+
+        {movieData?.err && (
           <div className="w-full h-screen flex flex-col items-center justify-center">
             <p className="text-dark-300 font-ppB">Something went wrong!</p>
             <h2 className="text-white-400 font-dmsans text-[20px] ">
