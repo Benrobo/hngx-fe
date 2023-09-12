@@ -26,7 +26,7 @@ function Home({ movieData }) {
   const imagePrix = `https://image.tmdb.org/t/p/original`;
 
   useEffect(() => {
-    const movies = movieData?.data?.results;
+    const movies = movieData?.data?.results.slice(0, 10);
     movieData?.err && setError("something went wrong");
     setMovies(movies);
 
