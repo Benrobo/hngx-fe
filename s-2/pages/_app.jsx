@@ -4,6 +4,7 @@ import nProgress from "nprogress";
 import { ChakraProvider } from "@chakra-ui/react";
 import { dmSans, dmSansBold, ppB, ppEB, ppReg } from "../config/fonts";
 import { Router } from "next/router";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 // nprogress loader
 Router.events.on("routeChangeStart", nProgress.start);
@@ -24,9 +25,11 @@ export default function App({ Component, pageProps }) {
           }
         `}
       </style>
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <ErrorBoundary>
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </ErrorBoundary>
     </>
   );
 }

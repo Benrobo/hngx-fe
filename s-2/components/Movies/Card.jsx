@@ -71,7 +71,7 @@ function MovieCard({ title, release_date, id, imageUrl }) {
         <div className="w-full flex items-center justify-between py-5 px-3">
           <span
             id="tag"
-            className="w-auto px-2 py-[4px] rounded-[30px] text-[12px] font-dmsansB bg-white-105 "
+            className="w-auto invisible px-2 py-[4px] rounded-[30px] text-[12px] font-dmsansB bg-white-105 "
           >
             TV SERIES
           </span>

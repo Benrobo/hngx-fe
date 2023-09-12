@@ -19,7 +19,6 @@ function Home({ movieData }) {
   const [movies, setMovies] = useState([]);
   const [previewMovie, setPreviewMovie] = useState([]);
   const [selectedPostermovie, setSelectedPosterMovie] = useState({});
-  const [pause, setPause] = useState(false);
   const [searchWrd, setSearchWrd] = useState("");
   const router = useRouter();
 
@@ -33,52 +32,12 @@ function Home({ movieData }) {
     const fivePreviewMovie = movies?.length > 0 ? movies.slice(0, 6) : [];
     setPreviewMovie(fivePreviewMovie);
     setSelectedPosterMovie(fivePreviewMovie[0]);
-  }, [movieData, movies]);
-
-  // handle random movie selection
-  useEffect(() => {
-    const countInterval = setInterval(() => {
-      randomPosterMovie();
-      if (pause) {
-        clearInterval(countInterval);
-        console.log("[INTEVAL]: CLEARED");
-        return;
-      }
-    }, 15000);
-
-    if (pause === false) {
-      console.log("[POSTER TIMING]: RESUME");
-      console.log("[INTEVAL]: RESUMED");
-    }
-
-    function randomPosterMovie() {
-      if (previewMovie.length >= 5) {
-        const rand = Math.floor(Math.random() * 5);
-        const movie = previewMovie[rand];
-        setSelectedPosterMovie(movie);
-      }
-    }
-
-    return () => {
-      clearInterval(countInterval); // Clear the interval when the component unmounts
-    };
-  }, [previewMovie, movies, pause]);
-
-  // monitor when user clicks the movie indicator and resume random timing after 15ms
-  useEffect(() => {
-    if (pause) {
-      setTimeout(() => {
-        setPause(false);
-      }, 15000);
-      console.log("[POSTER TIMING]: PAUSED");
-    }
-  }, [pause]);
+  }, [movieData]);
 
   function selectMovie(id) {
     if (!id) return;
     const filteredMovie = previewMovie.find((m) => m.id === id);
     setSelectedPosterMovie(filteredMovie);
-    setPause(true);
   }
 
   async function handleSearchMovies() {
@@ -88,8 +47,6 @@ function Home({ movieData }) {
       window.location.href = `/search/${searchWrd}`;
     }, 2000);
   }
-
-  console.log({ error, movies });
 
   return (
     <Layout showFooter={true}>
@@ -123,7 +80,6 @@ function Home({ movieData }) {
                   setSearchWrd(e.target.value);
                 }}
                 onKeyDown={(e) => {
-                  console.log(e.code);
                   if (e.code === "Enter") {
                     handleSearchMovies();
                   }
@@ -275,7 +231,7 @@ function PosterComponent({ movie }) {
             className="w-full md:w-[404px] h-auto flex items-start justify-start flex-col gap-[16px] "
           >
             <h1 className="text-white-100 text-[20px] md:text-[48px] leading-[56px] font-ppB ">
-              {movie?.original_title ?? ""}
+              {movie?.original_title ?? movie?.original_name ?? ""}
             </h1>
             <div className="w-full flex items-center justify-start gap-10">
               <div className="w-auto flex items-center gap-3">

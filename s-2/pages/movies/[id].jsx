@@ -25,6 +25,8 @@ function SelectedMovie({ movieData }) {
   const { query } = useRouter();
   const { pageLoaded } = usePageLoaded(1);
 
+  console.log(movieData);
+
   const movie = movieData?.data;
   const imagePrix = `https://image.tmdb.org/t/p/original`;
   const fullImage = `${imagePrix}/${movie?.backdrop_path}`;
@@ -32,7 +34,9 @@ function SelectedMovie({ movieData }) {
   const genre = movie?.genres?.map((g) => g.name);
   const title = movie?.original_title;
   const desc = movie?.overview;
-  const release_date = new Date(movie?.release_date).toISOString();
+  const release_date = new Date(
+    movie?.release_date ?? m?.first_air_date
+  )?.toISOString();
   const rating = formatNumber(movie?.vote_count);
 
   const movieRuntime = () => {
