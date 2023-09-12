@@ -13,7 +13,7 @@ function SearchPage({ movieData }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const movies = movieData?.data?.results.slice(0, 10);
+    const movies = movieData?.data?.results;
     movieData?.err && setError("something went wrong");
     setMovies(movies);
   }, [movieData, movies]);

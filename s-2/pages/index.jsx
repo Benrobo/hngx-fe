@@ -43,9 +43,9 @@ function Home({ movieData }) {
   async function handleSearchMovies() {
     if (searchWrd.length === 0) return;
     router.push(`/search/${searchWrd}`);
-    setTimeout(() => {
-      window.location.href = `/search/${searchWrd}`;
-    }, 2000);
+    // setTimeout(() => {
+    //   window.location.href = `/search/${searchWrd}`;
+    // }, 2000);
   }
 
   return (
