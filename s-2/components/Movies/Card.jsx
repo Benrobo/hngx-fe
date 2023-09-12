@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import posterImg from "../../public/images/poster/Poster.png";
 import { AiFillHeart } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import moment from "moment";
 
 function MovieCard({ title, release_date, id, imageUrl }) {
+  const [savedmovieId, setSavedMovieId] = useState("");
   const imageStyle = {
     backgroundImage: `url(${imageUrl ?? "/images/poster/Poster.png"})`,
     backgroundSize: "cover",
@@ -16,11 +17,49 @@ function MovieCard({ title, release_date, id, imageUrl }) {
     backgroundPosition: "center",
   };
 
+  useEffect(() => {
+    const movies =
+      localStorage.getItem("@movies") === null
+        ? null
+        : JSON.parse(localStorage.getItem("@movies"));
+    if (movies !== null && movies.length > 0) {
+      const filtered = movies.find((d) => d.id === id);
+      setSavedMovieId(filtered?.id ?? "");
+    }
+  }, []);
+
+  function addToLocalStorage() {
+    const data = {
+      id,
+      title,
+      release_date,
+      imageUrl,
+    };
+    const prevItems =
+      localStorage.getItem("@movies") === null
+        ? null
+        : JSON.parse(localStorage.getItem("@movies"));
+
+    if (prevItems !== null) {
+      const filtered = prevItems.filter((d) => d.id === id);
+      if (filtered.length === 0) {
+        const comb = [...prevItems, data];
+        localStorage.setItem("@movies", JSON.stringify(comb));
+        setSavedMovieId(id);
+      } else {
+        const rest = prevItems.filter((d) => d.id !== id);
+        localStorage.setItem("@movies", JSON.stringify(rest));
+        setSavedMovieId("");
+      }
+    } else {
+      localStorage.setItem("@movies", JSON.stringify([data]));
+      if (savedmovieId === id) setSavedMovieId("");
+      else setSavedMovieId(id);
+    }
+  }
+
   return (
-    <Link
-      href={`/movie/${id}`}
-      className="w-[250px] max-w-[250px] relative min-h-[490px] flex flex-col items-center justify-start leading-5 "
-    >
+    <div className="w-[250px] max-w-[250px] relative min-h-[490px] flex flex-col items-center justify-start leading-5 ">
       <div className="w-full h-[360px] relative " style={imageStyle}>
         <div className="w-full flex items-center justify-between py-5 px-3">
           <span
@@ -32,14 +71,22 @@ function MovieCard({ title, release_date, id, imageUrl }) {
           <button
             className={twMerge(
               "flex flex-col items-center justify-center text-white-300 p-2 rounded-[50%] ",
-              true ? "bg-red-100" : "bg-white-105"
+              savedmovieId === id ? "bg-red-100" : "bg-white-105"
             )}
+            onClick={addToLocalStorage}
           >
-            <AiFillHeart className={true ? "text-red-305" : "text-white-300"} />
+            <AiFillHeart
+              className={
+                savedmovieId === id ? "text-red-305" : "text-white-300"
+              }
+            />
           </button>
         </div>
       </div>
-      <div className="w-full flex flex-col items-start justify-start mt-4 gap-2">
+      <Link
+        href={`/movie/${id}`}
+        className="w-full flex flex-col items-start justify-start mt-4 gap-2"
+      >
         <p className="text-white2-600 font-dmsans text-[13px] ">
           {moment(release_date).startOf("day").fromNow()}
         </p>
@@ -61,8 +108,8 @@ function MovieCard({ title, release_date, id, imageUrl }) {
             {/* Action, Adventure */}
           </span>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
