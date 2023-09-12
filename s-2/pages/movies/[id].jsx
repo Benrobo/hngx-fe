@@ -182,8 +182,6 @@ export async function getServerSideProps({ query }) {
   const apiKey = process.env.TMDB_API;
   const resp = await getMovieById(apiKey, query?.id);
 
-  console.log({ resp });
-
   let result = { err: false, data: null };
 
   if (resp?.success === false) {

@@ -21,7 +21,10 @@ function SearchPage({ movieData }) {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-start">
       <div className="w-full mx-auto drop-shadow-sm shadoow-sm bg-white-100 min-h-[80px] absolute top-2 px-4 flex items-center justify-between gap-10 z-upper">
-        <a href="/" className="w-auto flex items-center justify-center gap-4">
+        <Link
+          href="/"
+          className="w-auto flex items-center justify-center gap-4"
+        >
           <Image
             src={logoImg}
             className={"w-[30px] h-[30px] md:w-[50px] md:h-[50px] "}
@@ -32,19 +35,19 @@ function SearchPage({ movieData }) {
           <p className="text-dark-100 font-ppB text-[14px] md:text-[20px] ">
             MovieBox
           </p>
-        </a>
+        </Link>
       </div>
       <br />
       <br />
       <br />
       <section className="w-full min-h-[500px] flex flex-col items-center justify-start px-0 mt-10 py-9">
         <div className="w-full max-w-[90%] flex items-center justify-between md:px-5 px-8">
-          <a
+          <Link
             href="/"
             className="text-white-300 text-white-400 text-[14px] flex items-center justify-start gap-2 "
           >
             <FaArrowLeftLong size={20} /> Back
-          </a>
+          </Link>
           <h1 className="text-dark-400 font-dmsansB md:text-[20px] ">
             Search Result :{" "}
             <span className="text-dark-100">{movies.length}</span>

@@ -29,7 +29,7 @@ function MovieSidebar() {
 
   return (
     <div className="w-[180px] h-screen flex flex-col items-center justify-start py-4 rounded-r-[30px] rounded-b-[30px] border-r-solid border-r-[1px] border-r-white2-500 ">
-      <a
+      <Link
         href="/"
         className="w-auto min-h-[90px] flex items-center justify-start gap-4  px-4"
       >
@@ -43,7 +43,7 @@ function MovieSidebar() {
         <p className="text-dark-100 font-ppB text-[13px] md:text-[16px] ">
           MovieBox
         </p>
-      </a>
+      </Link>
       <div className="w-full h-full mt-9 flex flex-col items-center justify-start">
         {sidebarItems.map((d) => (
           <button

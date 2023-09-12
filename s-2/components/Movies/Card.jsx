@@ -114,12 +114,12 @@ function MovieCard({ title, release_date, id, imageUrl }) {
             <Image src={tomatoImg} width={15} height={10} alt="tomato" />
             <span className="text-white-400 font-dmsans text-[13px]">0%</span>
           </div> */}
-          <a
+          <Link
             href={`/movies/${id}`}
             className="text-red-306 font-dmsans text-[13px] underline "
           >
             View details
-          </a>
+          </Link>
         </div>
         <div className="w-full flex gap-1">
           <span className="text-white2-500 text-[13px] font-dmsansB ">
