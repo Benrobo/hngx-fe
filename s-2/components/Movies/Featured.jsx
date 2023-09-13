@@ -14,7 +14,7 @@ function FeaturedMovies({ movies }) {
           id={m.id}
           title={m.title ?? m?.original_name}
           release_date={m.release_date ?? m?.first_air_date}
-          imageUrl={`${imagePrix}/${m?.backdrop_path}`}
+          imageUrl={`${imagePrix}/${m?.poster_path}`}
         />
       ))}
       <br />

@@ -65,10 +65,19 @@ function MovieCard({ title, release_date, id, imageUrl }) {
     >
       <div
         className="w-full h-[360px] relative "
-        style={imageStyle}
-        data-testid="movie-poster"
+        // style={imageStyle}
+        // data-testid="movie-poster"
       >
-        <div className="w-full flex items-center justify-between py-5 px-3">
+        <img
+          className="w-full h-[360px] absolute top-0 left-0 "
+          src={imageUrl}
+          alt="poster-img"
+          width={0}
+          height={0}
+          placeholder="empty"
+          data-testid="movie-poster"
+        />
+        <div className="w-full absolute top-0 left-0 flex items-center justify-between py-5 px-3">
           <span
             id="tag"
             className="w-auto invisible px-2 py-[4px] rounded-[30px] text-[12px] font-dmsansB bg-white-105 "
