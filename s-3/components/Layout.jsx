@@ -4,7 +4,7 @@ import TopBar from "./TopBar";
 
 function Layout({ children, showFooter }) {
   return (
-    <div className="w-full transition-all scroll-smooth relative h-auto overflow-y-scroll bg-dark-100 hideScrollBar">
+    <div className="w-full transition-all scroll-smooth relative h-screen overflow-y-scroll bg-dark-100 hideScrollBar">
       <TopBar />
       {children}
       {showFooter && <Footer />}

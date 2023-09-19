@@ -250,7 +250,7 @@ function GalleryPage() {
           </div>
         </ChildBlurModal>
 
-        <motion.div className="mt-9">
+        <motion.div className="mt-9" layout>
           <Gallery images={updateGalleryImage} />
         </motion.div>
       </div>
