@@ -131,7 +131,7 @@ function GalleryPage() {
                 <div className="w-full h-full z-[500] absolute top-0 left-0 bg-dark-600 flex flex-col backdrop-blur items-center justify-center text-center">
                   <Spinner color="#fff" />
                   <p className="text-white-300 font-ppB mt-2 text-[12px] ">
-                    Processing {updatedFileData.length} Image
+                    Processing {acceptedFiles.length} Image
                   </p>
                 </div>
               )}

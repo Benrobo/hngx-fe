@@ -1,42 +1,52 @@
 [
   {
     "image": "/images/gallery/1.png",
-    "hash": "LEBXD?Iq9v%2-;DiD%%Lh2xE%Mw@"
+    "hash": "LEBXD?Iq9v%2-;DiD%%Lh2xE%Mw@",
+    "tags": ["sci-fi", "anime"]
   },
   {
     "image": "/images/gallery/2.png",
-    "hash": "L6CY?i0#4T5A~oSdR5kR00=Z%}={"
+    "hash": "L6CY?i0#4T5A~oSdR5kR00=Z%}={",
+    "tags": ["art"]
   },
   {
     "image": "/images/gallery/3.png",
-    "hash": "L9G8M]-:01xu*JF3rq,nEg9br=#k"
+    "hash": "L9G8M]-:01xu*JF3rq,nEg9br=#k",
+    "tags": ["art"]
   },
   {
     "image": "/images/gallery/4.png",
-    "hash": "L6H-rn9Y00Ic9jqu9rF#01%e7%tA"
+    "hash": "L6H-rn9Y00Ic9jqu9rF#01%e7%tA",
+    "tags": ["sci-fi", "game"]
   },
   {
     "image": "/images/gallery/5.png",
-    "hash": "L7DS,bTeLN=EMztRJV^*1Q?FvKKO"
+    "hash": "L7DS,bTeLN=EMztRJV^*1Q?FvKKO",
+    "tags": ["art"]
   },
   {
     "image": "/images/gallery/6.png",
-    "hash": "L8Du-;_M01003G%g};Mc5YW=w[IU"
+    "hash": "L8Du-;_M01003G%g};Mc5YW=w[IU",
+    "tags": ["oil painting"]
   },
   {
     "image": "/images/gallery/7.png",
-    "hash": "LHC6onIW#*4:_ND*s8NH5rIUn#?F"
+    "hash": "LHC6onIW#*4:_ND*s8NH5rIUn#?F",
+    "tags": ["sci-fi", "nature"]
   },
   {
     "image": "/images/gallery/8.png",
-    "hash": "LAEnq@7N0,-:;kRkM|wv0Lx]~BR."
+    "hash": "LAEnq@7N0,-:;kRkM|wv0Lx]~BR.",
+    "tags": ["sci-fi", "game"]
   },
   {
     "image": "/images/gallery/9.png",
-    "hash": "LFAU5K00$TyruivhIUt,K%xFIAtk"
+    "hash": "LFAU5K00$TyruivhIUt,K%xFIAtk",
+    "tags": ["sci-fi", "nature"]
   },
   {
     "image": "/images/gallery/10.png",
-    "hash": "LHD9q^?bH;I9~q?FNFRji{ROaxo#"
+    "hash": "LHD9q^?bH;I9~q?FNFRji{ROaxo#",
+    "tags": ["sci-fi", "nature"]
   }
 ]
