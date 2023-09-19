@@ -35,3 +35,44 @@ While adhering to the above requirements, you have the creative freedom to come 
 - Responsiveness: Design must be responsive across various desktop screens, including mobile and tablet screens.
 - User Experience: Design must be intuitive, appealing, and encourage easy navigation and operation (i.e., NO LAGGING).
   Image Display: All Images should have consistent spacing and sizing.
+
+# Setup
+
+Please follow the instructions below:
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/Benrobo/hngx-fe.git
+```
+
+2. Change directory
+
+```bash
+cd hngx-fe
+```
+
+3. Install all dependencies
+
+```bash
+# if you have npm or yarn installed, do the following
+
+# yarn users
+yarn
+
+#npm users
+npm install
+```
+
+4. Start the server
+
+```bash
+#yarn users
+yarn dev
+
+# npm users
+npm run dev
+
+```
+
+The server should begin live at [http://localhost:3000/](http://localhost:3000/)
