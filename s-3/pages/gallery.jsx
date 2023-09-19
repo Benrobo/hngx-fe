@@ -214,7 +214,10 @@ function GalleryPage() {
                       } px-3 flex flex-col items-center justify-center rounded-md text-center `}
                       {...getRootProps()}
                     >
-                      <input {...getInputProps()} />
+                      <input
+                        {...getInputProps()}
+                        accept="image/png,image/jpeg"
+                      />
                       {isDragActive ? (
                         <p className="text-white-400">Drop the files here...</p>
                       ) : (
