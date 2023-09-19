@@ -129,10 +129,8 @@ function GalleryPage() {
   const handleSearch = (searchTerm) => {
     if (searchTerm.length > 0) {
       const filteredImages = copyOfGalleryImage.filter((p) => {
-        console.log(p.tags);
-        return p?.tags.includes(searchTerm);
+        return p?.tags?.includes(searchTerm);
       });
-      console.log(filteredImages, searchTerm);
       setUpdateGalleryImage(filteredImages);
     } else {
       setUpdateGalleryImage(copyOfGalleryImage);
@@ -140,7 +138,7 @@ function GalleryPage() {
   };
 
   // Usage example:
-  const delayedFunction = debounce(handleSearch, 1000);
+  const delayedFunction = debounce(handleSearch, 500);
 
   return (
     <Layout>
@@ -154,26 +152,26 @@ function GalleryPage() {
               >
                 <BsFillCloudUploadFill /> Upload
               </button>
-              <div className="w-auto ml-5">
-                <div className="w-full border-solid border-[2px] border-white-600 flex items-center justify-start px-[.8em] rounded-lg ">
-                  <BsSearch size={20} className="text-white-400" />
-                  <input
-                    type="text"
-                    className="w-full bg-transparent text-[13px] px-3 py-2 outline-none font-ppB text-white-100"
-                    placeholder="Search here..."
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                      }
-                    }}
-                    onChange={(e) => {
-                      delayedFunction(e.target.value);
-                      setSearchWrd(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
             </>
           )}
+          <div className="w-auto ml-5">
+            <div className="w-full border-solid border-[2px] border-white-600 flex items-center justify-start px-[.8em] rounded-lg ">
+              <BsSearch size={20} className="text-white-400" />
+              <input
+                type="text"
+                className="w-full bg-transparent text-[13px] px-3 py-2 outline-none font-ppB text-white-100"
+                placeholder="Search here..."
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                  }
+                }}
+                onChange={(e) => {
+                  delayedFunction(e.target.value);
+                  setSearchWrd(e.target.value);
+                }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* upload modal */}

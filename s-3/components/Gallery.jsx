@@ -12,7 +12,13 @@ function Gallery({ images }) {
         className="w-full md:max-w-5xl lg:max-w-6xl h-auto md:h-auto md:columns-4 columns-2 mx-auto gap-5 px-5 pb-5 py-5 space-y-5 relative"
       >
         {images.map((d, idx) => (
-          <motion.div layout className="relative">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            layout
+            className="relative"
+          >
             <LazyLoadImg
               key={idx}
               src={d.image}
