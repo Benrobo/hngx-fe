@@ -1,7 +1,11 @@
 import React, { useContext, useCallback } from "react";
 import Gallery from "../components/Gallery.jsx";
 import Layout from "../components/Layout.jsx";
-import { BsFillCloudUploadFill } from "react-icons/bs";
+import {
+  BsFillCloudUploadFill,
+  BsFillSearchHeartFill,
+  BsSearch,
+} from "react-icons/bs";
 import DataContext from "../context/DataContext.jsx";
 import { ChildBlurModal } from "../components/Modal";
 import Dropzone from "react-dropzone";
@@ -17,14 +21,15 @@ function GalleryPage() {
   const [isDragActive, setIsDragActive] = React.useState(false);
   const [acceptedFiles, setAcceptedFiles] = React.useState([]);
   const [dndModal, setDnDModal] = React.useState(false);
-  const [imageDimension, setImageDimension] = React.useState({});
+  const [searchWrd, setSearchWrd] = React.useState("");
 
   const clearUploadedFiles = () => setAcceptedFiles([]);
   const toggleDnDModal = () => setDnDModal(!dndModal);
-  const [updatedFileData, setUpdatedFileData] = React.useState([
+  const [updateGalleryImage, setUpdateGalleryImage] = React.useState([
     ...galleryJson,
   ]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [copyOfGalleryImage, setCopyOfGalleryImage] = React.useState([]);
 
   function uploadFiles() {}
 
@@ -70,7 +75,8 @@ function GalleryPage() {
             const appendWithDelay = async (dataList, delay) => {
               for (const d of dataList) {
                 await new Promise((resolve) => setTimeout(resolve, delay));
-                setUpdatedFileData((prev) => [d, ...prev]);
+                setUpdateGalleryImage((prev) => [d, ...prev]);
+                setCopyOfGalleryImage((prev) => [d, ...prev]);
               }
             };
 
@@ -104,17 +110,69 @@ function GalleryPage() {
     }
   }, [acceptedFiles]);
 
+  React.useEffect(() => {
+    setCopyOfGalleryImage(galleryJson);
+  }, []);
+
+  function debounce(fn, delay) {
+    let timerId;
+
+    return function (...args) {
+      clearTimeout(timerId);
+
+      timerId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  }
+
+  const handleSearch = (searchTerm) => {
+    if (searchTerm.length > 0) {
+      const filteredImages = copyOfGalleryImage.filter((p) => {
+        console.log(p.tags);
+        return p?.tags.includes(searchTerm);
+      });
+      console.log(filteredImages, searchTerm);
+      setUpdateGalleryImage(filteredImages);
+    } else {
+      setUpdateGalleryImage(copyOfGalleryImage);
+    }
+  };
+
+  // Usage example:
+  const delayedFunction = debounce(handleSearch, 1000);
+
   return (
     <Layout>
       <div className="w-full h-screen mt-9 py-8">
-        <div className="w-full flex items-center justify-start px-4 py-2">
+        <div className="w-full border-dashed border-b-[2px] border-b-white-600 flex items-center justify-start px-4 py-3">
           {isSignedIn && (
-            <button
-              className={`w-auto px-4 py-2 rounded-[30px] font-ppB bg-white-100 text-dark-200 text-[14px] flex items-center justify-start gap-2 border-[1px] border-white-600 hover:opacity-[1] opacity-[.80] transition-all scale-[.95] hover:scale-[1]  `}
-              onClick={toggleDnDModal}
-            >
-              <BsFillCloudUploadFill /> Upload
-            </button>
+            <>
+              <button
+                className={`w-auto px-4 py-2 rounded-[30px] font-ppB bg-white-100 text-dark-200 text-[14px] flex items-center justify-start gap-2 border-[1px] border-white-600 hover:opacity-[1] opacity-[.80] transition-all scale-[.95] hover:scale-[1]  `}
+                onClick={toggleDnDModal}
+              >
+                <BsFillCloudUploadFill /> Upload
+              </button>
+              <div className="w-auto ml-5">
+                <div className="w-full border-solid border-[2px] border-white-600 flex items-center justify-start px-[.8em] rounded-lg ">
+                  <BsSearch size={20} className="text-white-400" />
+                  <input
+                    type="text"
+                    className="w-full bg-transparent text-[13px] px-3 py-2 outline-none font-ppB text-white-100"
+                    placeholder="Search here..."
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                      }
+                    }}
+                    onChange={(e) => {
+                      delayedFunction(e.target.value);
+                      setSearchWrd(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+            </>
           )}
         </div>
 
@@ -194,8 +252,8 @@ function GalleryPage() {
           </div>
         </ChildBlurModal>
 
-        <motion.div>
-          <Gallery images={updatedFileData} />
+        <motion.div className="mt-9">
+          <Gallery images={updateGalleryImage} />
         </motion.div>
       </div>
     </Layout>

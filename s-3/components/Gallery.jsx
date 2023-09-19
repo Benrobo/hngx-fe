@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 function Gallery({ images }) {
-  console.log(images);
+  // console.log(images);
   return (
     <>
       <motion.div
-        className="w-full md:max-w-5xl lg:max-w-6xl h-auto md:h-auto md:columns-4 columns-2 mx-auto gap-5 px-5 pb-5 py-5 space-y-5 relative"
         layout
+        className="w-full md:max-w-5xl lg:max-w-6xl h-auto md:h-auto md:columns-4 columns-2 mx-auto gap-5 px-5 pb-5 py-5 space-y-5 relative"
       >
         {images.map((d, idx) => (
-          <div className="relative">
+          <motion.div layout className="relative">
             <LazyLoadImg
               key={idx}
               src={d.image}
@@ -22,6 +22,7 @@ function Gallery({ images }) {
               width={d.width ?? 300}
               className={"min-w-full rounded-[10px] "}
             />
+
             <div className="w-full flex items-center justify-start absolute top-0 left-5 py-4 gap-2 px-3">
               {d?.tags?.length > 0 ? (
                 d?.tags.map((t) => (
@@ -35,7 +36,7 @@ function Gallery({ images }) {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
           // <Image
           //   src={d.image}
           //   className={"min-w-full rounded-[10px] "}

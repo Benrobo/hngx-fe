@@ -34,8 +34,6 @@ function TopBar() {
 
   const handleLogout = () => {};
 
-  console.log({ isSignedIn });
-
   return (
     <div
       className={`w-full h-auto border-b-[1px] border-b-white-600 fixed top-0 left-0 z-[200] bg-dark-200 backdrop-blur `}
