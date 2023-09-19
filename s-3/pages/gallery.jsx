@@ -17,6 +17,7 @@ function GalleryPage() {
   const [isDragActive, setIsDragActive] = React.useState(false);
   const [acceptedFiles, setAcceptedFiles] = React.useState([]);
   const [dndModal, setDnDModal] = React.useState(false);
+  const [imageDimension, setImageDimension] = React.useState({});
 
   const clearUploadedFiles = () => setAcceptedFiles([]);
   const toggleDnDModal = () => setDnDModal(!dndModal);
@@ -55,7 +56,12 @@ function GalleryPage() {
             4,
             4
           );
-          return { image: image.src, hash };
+          return {
+            image: image.src,
+            hash,
+            width: imageData.width,
+            height: imageData.height,
+          };
         });
 
         Promise.all(blurhashPromises)
@@ -125,7 +131,7 @@ function GalleryPage() {
                 <div className="w-full h-full z-[500] absolute top-0 left-0 bg-dark-600 flex flex-col backdrop-blur items-center justify-center text-center">
                   <Spinner color="#fff" />
                   <p className="text-white-300 font-ppB mt-2 text-[12px] ">
-                    Processing Image
+                    Processing {updatedFileData.length} Image
                   </p>
                 </div>
               )}

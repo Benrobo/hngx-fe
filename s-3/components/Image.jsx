@@ -1,3 +1,4 @@
+import NextImage from "next/image";
 import React, { useState } from "react";
 import { Blurhash } from "react-blurhash";
 
@@ -71,7 +72,7 @@ export function LazyLoadImg({
         />
       )}
       {imgLoaded && (
-        <img
+        <NextImage
           src={src}
           className={className}
           alt={alt}
@@ -79,7 +80,9 @@ export function LazyLoadImg({
           height={height}
           style={style}
           crossOrigin={"anonymous"}
-          loading="lazy"
+          placeholder="blur"
+          blurDataURL={src}
+          objectFit="cover"
         />
       )}
     </>
