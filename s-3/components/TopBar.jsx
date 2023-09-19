@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import ImageTag from "./Image.jsx";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import { BsFillShieldLockFill } from "react-icons/bs";
+import { useRouter } from "next/router.js";
 
 function TopBar() {
   const [scrollY, setScrollY] = useState(0);
   const [isScrolledPast, setIsScrolledPast] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const { isSignedIn } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userData"));
@@ -55,7 +57,6 @@ function TopBar() {
           </Link>
         </div>
         <div className="w-auto px-7 left flex items-center justify-center">
-          <UserButton afterSignOutUrl="/" />
           {isSignedIn === false ? (
             <div className="w-auto flex items-center gap-2">
               <Link
@@ -73,7 +74,15 @@ function TopBar() {
                 <BsFillShieldLockFill className="text-dark-100" /> Sign-in
               </Link>
             </div>
+          ) : router.pathname !== "/gallery" ? (
+            <Link
+              href="/gallery"
+              className={`w-auto mr-6 px-4 py-2 rounded-[30px] font-ppB bg-white-100 text-dark-100 text-[14px] flex items-center justify-start gap-2 border-[1px] border-white-600 hover:opacity-[1] opacity-[.80] transition-all scale-[.85] hover:scale-[1]  `}
+            >
+              <BsFillShieldLockFill className="text-dark-100" /> Gallery
+            </Link>
           ) : null}
+          <UserButton afterSignOutUrl="/" />
         </div>
       </div>
     </div>
