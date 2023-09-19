@@ -4,7 +4,9 @@ import Layout from "../../components/Layout";
 export default function Page() {
   return (
     <Layout>
-      <SignIn />
+      <div className="w-full h-screen flex flex-col items-center justify-center">
+        <SignIn />
+      </div>
     </Layout>
   );
 }

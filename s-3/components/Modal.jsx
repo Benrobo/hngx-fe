@@ -17,8 +17,8 @@ export const ChildBlurModal = ({
     setIsVisible(isOpen);
   }, [isOpen]);
 
-  const handleClickOutside = (e: Event) => {
-    const tgt = (e.target as any)?.dataset;
+  const handleClickOutside = (e) => {
+    const tgt = e.target?.dataset;
     const name = tgt.name;
     name && onClose;
   };
@@ -42,14 +42,14 @@ export const ChildBlurModal = ({
 
   return (
     <div
-      className={`w-full backdrop-blur bg-black bg-opacity-75 h-[100vh] ${
-        fixed ? "fixed z-[250px]" : "absolute"
-      } top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-[50] overflow-y-auto hideScollBar py-5`}
+      className={`w-full backdrop-blur bg-white-500 bg-opacity-75 h-[100vh] ${
+        fixed ? "fixed z-[900]" : "absolute"
+      } top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-[50] overflow-y-auto hideScollBar overflow-x-hidden py-5`}
       data-name="main-modal"
     >
       <div className={`${isVisible ? "opacity-100" : "opacity-0"}`}>
         {showCloseIcon && (
-          <div className="absolute top-3 right-0 p-1 z-[70]">
+          <div className="absolute top-[3em] right-0 p-1 z-[70]">
             <IconButton
               aria-label="close"
               className="mt-5 mr-5 bg-dark-405"

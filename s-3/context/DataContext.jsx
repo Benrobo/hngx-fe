@@ -5,13 +5,7 @@ const DataContext = createContext();
 export default DataContext;
 
 export function DataContextProvider({ children }) {
-  const [uploadModal, setUploadModal] = useState(false);
-
-  const toggleUploadModal = () => setUploadModal(!uploadModal);
-
-  const contextStateValues = {
-    toggleUploadModal,
-  };
+  const contextStateValues = {};
 
   return (
     <DataContext.Provider value={contextStateValues}>
