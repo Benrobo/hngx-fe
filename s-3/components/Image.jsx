@@ -1,7 +1,6 @@
 import NextImage from "next/image";
 import React, { useState } from "react";
 import { Blurhash } from "react-blurhash";
-import { motion } from "framer-motion";
 
 function ImageTag({ src, width, height, alt, className, style, ...props }) {
   return (
